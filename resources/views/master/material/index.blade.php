@@ -1,22 +1,28 @@
 @extends('layouts.app')
 
+@php
+    $text = langData();
+@endphp
+
+@section('title', $text['material_master'] ?? 'Material Master')
+
 @section('content')
     <div class="container mt-4">
-        <h1 class="mb-4">Material Master</h1>
+        <h1 class="mb-4">{{ $text['material_master'] ?? 'Material Master' }}</h1>
 
         <div class="mb-3">
-            <a href="{{ route('master.material.add') }}" class="btn btn-primary">Add New Material</a>
+            <a href="{{ route('master.material.add') }}" class="btn btn-primary">{{ $text['add_data'] ?? 'Add New Material' }}</a>
         </div>
         
         <table class="table table-striped table-hover">
             <thead class="thead-dark">
             <tr>
                 <th>No.</th>
-                <th>Material</th>
-                <th>Material Description</th>
-                <th>UOM</th>
-                <th>Check</th>
-                <th>Actions</th>
+                <th>{{ $text['material'] ?? 'Material' }}</th>
+                <th>{{ $text['material_desc'] ?? 'Material Description' }}</th>
+                <th>{{ $text['uom'] ?? 'UOM' }}</th>
+                <th>{{ $text['check'] ?? 'Check' }}</th>
+                <th>{{ $text['action'] ?? 'Actions' }}</th>
             </tr>
         </thead>
         <tbody>
@@ -28,11 +34,12 @@
                     <td>{{ $material->uom }}</td>
                     <td>{{ $material->check ? 'Yes' : 'No' }}</td>
                     <td>
-                        <a href="{{ route('master.material.edit', $material->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                        <a href="{{ route('master.material.edit', $material->id) }}" class="btn btn-sm btn-warning">
+                        {{ $text['edit'] ?? 'Edit' }}</a>
                         <form action="{{ route('master.material.destroy', $material->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">{{ $text['delete'] ?? 'Delete' }}</button>
                         </form>
                     </td>
                 </tr>

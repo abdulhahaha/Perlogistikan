@@ -1,54 +1,51 @@
+@php
+    $text = langData();
+@endphp
+
 <header>
     <div class="logo">Logo</div>
     <nav>
         <ul>
-            <li><a href="/home">Home</a></li>
+            <li><a href="/home">{{ $text['home'] ?? 'Home' }}</a></li>
             <li>
-                <a href="#">Inventory</a>
+                <a href="#">{{ $text['inventory'] ?? 'Inventory' }}</a>
                 <ul class="dropdown">
-                    <li><a href="/inventory/inbound">Inbound</a></li>
-                    <li><a href="/inventory/detail">Inventory Details</a></li>
-                    <li><a href="/inventory/outbound">Outbound</a></li>
+                    <li><a href="/inventory/inbound">{{ $text['inbound'] ?? 'Inbound' }}</a></li>
+                    <li><a href="/inventory/detail">{{ $text['detail'] ?? 'Detail' }}</a></li>
+                    <li><a href="/inventory/outbound">{{ $text['outbound'] ?? 'Outbound' }}</a></li>
                 </ul>
             </li>
-            
-            <!-- Dropdown Master -->
             <li>
-                <a href="#">Master</a>
+                <a href="#">{{ $text['master'] ?? 'Master' }}</a>
                 <ul class="dropdown">
-                    <li><a href="/master/location">Location Master</a></li>
-                    <li><a href="/master/material">Material Master</a></li>
-                    <li><a href="/master/shipper">Shipper Master</a></li>
+                    <li><a href="/master/location">{{ $text['location_master'] ?? 'Location Master' }}</a></li>
+                    <li><a href="/master/material">{{ $text['material_master'] ?? 'Material Master' }}</a></li>
+                    <li><a href="/master/shipper">{{ $text['shipper_master'] ?? 'Shipper Master' }}</a></li>
                 </ul>
             </li>
-            
-            <!-- Dropdown Movement -->
             <li>
-                <a href="#">Movement</a>
+                <a href="#">{{ $text['movement'] ?? 'Movement' }}</a>
                 <ul class="dropdown">
-                    <li><a href="/location-movement">Location Movement</a></li>
-                    <li><a href="/pallet-movement">Pallet Movement</a></li>
+                    <li><a href="/location-movement">{{ $text['location_mov'] ?? 'Location Movement' }}</a></li>
+                    <li><a href="/pallet-movement">{{ $text['pallet_mov'] ?? 'Pallet Movement' }}</a></li>
                 </ul>
             </li>
-            
-            <!-- Dropdown Count -->
+            <li><a href="/count">{{ $text['count'] ?? 'Count' }}</a></li>
+            <li><a href="/adjusment">{{ $text['adjusment'] ?? 'Adjusment' }}</a></li>
             <li>
-                <a href="#">Count</a>
+                <a href="#">{{ $text['language'] ?? 'Language' }}</a>
                 <ul class="dropdown">
-                    <li><a href="/count/cycle">Cycle Count</a></li>
-                    <li><a href="/count/founding">Founding Count</a></li>
+                    <li><a href="{{ route('locale', ['locale' => 'id']) }}">Indonesia</a></li>
+                    <li><a href="{{ route('locale', ['locale' => 'en']) }}">English</a></li>
                 </ul>
             </li>
-            
-            <li><a href="/adjusment">Adjustment</a></li>
-            
             @guest
-                <li><a href="{{ route('login') }}">Login</a></li>
+                <li><a href="{{ route('login') }}">{{ $text['login'] ?? 'Login' }}</a></li>
             @else
                 <li>
                     <form method="POST" action="{{ route('logout') }}" style="display: inline;">
                         @csrf
-                        <a href="/logout">Logout</a>
+                        <a href="/logout">{{ $text['logout'] ?? 'Logout' }}</a>
                     </form>
                 </li>
             @endguest

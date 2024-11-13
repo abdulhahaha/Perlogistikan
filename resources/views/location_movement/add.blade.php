@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Add Location Movement')
+
 @section('content')
 <div class="container">
     <h2>Buat Location Movement</h2>

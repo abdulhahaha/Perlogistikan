@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LanguageController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
@@ -14,27 +15,25 @@ use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\ShipperController;
 use App\Http\Controllers\LocationMovementController;
 use App\Http\Controllers\PalletMovementController;
+use App\Http\Controllers\CountController;
+use App\Http\Controllers\AdjusmentController;
 
 
 
-// Rute halaman utama
+
+
 Route::get('/', [Home::class, 'index'])->name('home');
 
-// Rute untuk tamu (guest)
 Route::middleware(['guest'])->group(function() {
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
     
-    // Rute untuk halaman form reset password
 Route::get('forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])
     ->name('password.request');
-
-    // Rute untuk mengirim email reset password
 Route::post('forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])
     ->name('password.email');
 });
 
-// Rute untuk pengguna yang sudah terautentikasi (auth)
 Route::middleware(['auth'])->group(function() {
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::get('/home', [Home::class, 'index'])->name('home');
@@ -43,17 +42,14 @@ Route::middleware(['auth'])->group(function() {
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register']);
 
+Route::get('switch-language/{locale}', [LanguageController::class, 'switchLang'])->name('locale');
 Route::get('/inventory/inbound', [InboundController::class, 'index'])->name('inventory.inbound.index');
 Route::get('/inventory/inbound/create', [InboundController::class, 'create'])->name('inventory.inbound.create');
 Route::post('/inventory/inbound/store', [InboundController::class, 'store'])->name('inbound.store');
-// Route untuk halaman Import Data
 Route::get('/inventory/inbound/import', [InboundController::class, 'showImportForm'])->name('inventory.inbound.import');
 Route::post('/inventory/inbound/import', [InboundController::class, 'import'])->name('inventory.inbound.import');
-
-// Route untuk halaman Add Data
 Route::get('/inventory/inbound/add', [InboundController::class, 'create'])->name('inventory.inbound.add');
 Route::post('/inventory/inbound/add', [InboundController::class, 'store'])->name('inbound.store');
-
 Route::get('/inventory/inbound/{id}/edit', [InboundController::class, 'edit'])->name('inventory.inbound.edit');
 Route::delete('/inventory/inbound/{id}', [InboundController::class, 'destroy'])->name('inventory.inbound.destroy');
 Route::put('/inventory/inbound/{id}', [InboundController::class, 'update'])->name('inventory.inbound.update');
@@ -98,3 +94,15 @@ Route::post('/location-movement', [LocationMovementController::class, 'store'])-
 Route::get('pallet-movement', [PalletMovementController::class, 'index'])->name('pallet_movement.index');
 Route::get('pallet-movement/add', [PalletMovementController::class, 'create'])->name('pallet_movement.add');
 Route::post('pallet-movement', [PalletMovementController::class, 'store'])->name('pallet_movement.store');
+
+Route::get('/count', [CountController::class, 'index'])->name('count.index');
+Route::get('/count/check', [CountController::class, 'checkInventory'])->name('count.check');
+
+Route::get('adjusment', [AdjusmentController::class, 'index'])->name('adjusment.index');
+Route::get('adjusment/create', [AdjusmentController::class, 'create'])->name('adjusment.create');
+Route::post('adjusment', [AdjusmentController::class, 'store'])->name('adjusment.store');
+Route::get('adjusment/{id}', [AdjusmentController::class, 'show'])->name('adjusment.show');
+Route::get('adjusment/{id}/edit', [AdjusmentController::class, 'edit'])->name('adjusment.edit');
+Route::put('adjusment/{id}', [AdjusmentController::class, 'update'])->name('adjusment.update');
+Route::delete('adjusment/{id}', [AdjusmentController::class, 'destroy'])->name('adjusment.destroy');
+

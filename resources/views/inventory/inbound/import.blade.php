@@ -1,8 +1,14 @@
 @extends('layouts.app')
 
+@php
+    $text = langData();
+@endphp
+
+@section('title', $text['import'] ?? 'Import Inbound')
+
 @section('content')
 <div class="container">
-    <h2 class="text-center mb-4">Import Data</h2>
+    <h2 class="text-center mb-4">{{ $text['import'] ?? 'Import' }} {{ $text['inbound'] ?? 'Data' }}</h2>
 
     <div class="card mx-auto" style="max-width: 600px;">
         <div class="card-body">
@@ -11,13 +17,13 @@
 
                 <!-- Input File -->
                 <div class="form-group">
-                    <label for="file">Choose File</label>
+                    <label for="file">{{ $text['choose_file'] ?? 'Choose File' }}</label>
                     <input type="file" name="file" class="form-control" id="file" required>
                 </div>
 
                 <!-- Submit Button -->
                 <button type="submit" class="btn btn-primary btn-block">
-                    <i class="fas fa-file-import"></i> Import Data
+                    <i class="fas fa-file-import"></i> {{ $text['import'] ?? 'Import' }} {{ $text['data'] ?? 'Data' }}
                 </button>
             </form>
         </div>

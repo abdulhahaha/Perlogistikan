@@ -1,13 +1,19 @@
 @extends('layouts.app')
 
-@section('title', 'Warehouse Management')
+@php
+    $text = langData();
+@endphp
+
+@section('title')
+    {{ $text['title'] ?? 'Default Judul' }}
+@endsection
 
 @section('content')
     <div class="left-content">
-        <img src="{{ asset('images/warehouse.png') }}" alt="Warehouse Illustration">
+        <img src="{{ asset('images/warehouse.png') }}" alt="{{ $text['gambar'] ?? 'Default Alt Text' }}">
     </div>
     <div class="right-content">
-        <h1>Transformasikan Pengelolaan Gudang Anda dengan Solusi Kami</h1>
-        <p>Optimalkan operasi gudang Anda dengan solusi manajemen yang canggih. Kelola inventaris, pesanan, dan pengiriman dengan mudah melalui antarmuka yang intuitif.</p>
+        <h1>{{ $text['desc'] ?? 'Default Description' }}</h1>
+        <p>{{ $text['sub_desc'] ?? 'Default Sub Description' }}</p>
     </div>
 @endsection

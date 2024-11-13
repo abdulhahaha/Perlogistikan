@@ -1,12 +1,18 @@
 @extends('layouts.app')
 
+@php
+    $text = langData();
+@endphp
+
+@section('title', $text['outbound'] ?? 'Outbound')
+
 @section('content')
 <div class="container">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="text-center mx-auto mb-0">OUTBOUND</h2>
+        <h2 class="text-center mx-auto mb-0">{{ $text['outbound'] ?? 'Outbound' }}</h2>
         <div class="actions ml-auto">
             <a href="{{ route('inventory.outbound.add') }}" class="btn btn-primary">
-                <i class="fas fa-plus-circle"></i> Add Data
+                <i class="fas fa-plus-circle"></i> {{ $text['add_data'] ?? 'Add Data' }}
             </a>
         </div>
     </div>
@@ -23,16 +29,16 @@
             <thead class="thead-light">
             <tr>
                 <th>No.</th>
-                <th>Shipped Date</th>
-                <th>No. Document</th>
-                <th>Shipper</th>
+                <th>{{ $text['date2'] ?? 'Shipped Date' }}</th>
+                <th>{{ $text['no_doc'] ?? 'No. Document' }}</th>
+                <th>{{ $text['shipper'] ?? 'Shipper' }}</th>
                 <th>PLT ID</th>
-                <th>Location</th>
-                <th>Material</th>
-                <th>Material Description</th>
-                <th>Qty</th>
-                <th>Uom</th>
-                <th>Remarks</th>
+                <th>{{ $text['location'] ?? 'Location' }}</th>
+                <th>{{ $text['material'] ?? 'Material' }}</th>
+                <th>{{ $text['material_desc'] ?? 'Material Description' }}</th>
+                <th>{{ $text['qty'] ?? 'Quantity' }}</th>
+                <th>{{ $text['uom'] ?? 'UOM' }}</th>
+                <th>{{ $text['remarks'] ?? 'Remarks' }}</th>
             </tr>
             </thead>
             <tbody>

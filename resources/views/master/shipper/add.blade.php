@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Add Shipper')
+
 @section('content')
     <div class="container mt-4">
         <h1 class="mb-4">Create Shipper</h1>

@@ -1,25 +1,31 @@
 @extends('layouts.app')
 
+@php
+    $text = langData();
+@endphp
+
+@section('title', $text['detail'] ?? 'Detail')
+
 @section('content')
 <div class="container">
-    <h2 class="mb-4">Inventory Details</h2>
+    <h2 class="mb-4">{{ $text['detail'] ?? 'Detail' }}</h2>
 
-    <a href="{{ route('inventory.detail.add') }}" class="btn btn-primary mb-3">Add Inventory Item</a>
+    <a href="{{ route('inventory.detail.add') }}" class="btn btn-primary mb-3">{{ $text['add_data'] ?? 'Add Data' }}</a>
 
     <table class="table table-striped">
         <thead>
             <tr>
                 <th>No</th>
-                <th>Receive Date</th>
-                <th>Location</th>
+                <th>{{ $text['date1'] ?? 'Date' }}</th>
+                <th>{{ $text['location'] ?? 'Location' }}</th>
                 <th>PLT ID</th>
-                <th>Material</th>
-                <th>Material Description</th>
-                <th>Uom</th>
-                <th>Unrestricted</th>
-                <th>Blocked</th>
-                <th>Remarks</th>
-                <th>Actions</th>
+                <th>{{ $text['material'] ?? 'Material' }}</th>
+                <th>{{ $text['material_desc'] ?? 'Material Description' }}</th>
+                <th>{{ $text['uom'] ?? 'UOM' }}</th>
+                <th>{{ $text['unrestricted'] ?? 'Unrestricted' }}</th>
+                <th>{{ $text['blocked'] ?? 'Blocked' }}</th>
+                <th>{{ $text['remarks'] ?? 'Remarks' }}</th>
+                <th>{{ $text['action'] ?? 'Actions' }}</th>
             </tr>
         </thead>
         <tbody>
@@ -36,11 +42,11 @@
                 <td>{{ $inventoryDetail->blocked }}</td>
                 <td>{{ $inventoryDetail->remarks }}</td>
                 <td>
-                    <a href="{{ route('inventory.detail.edit', $inventoryDetail->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                    <form action="{{ route('inventory.detail.destroy', $inventoryDetail->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure?');">
+                    <a href="{{ route('inventory.detail.edit', $inventoryDetail->id) }}" class="btn btn-warning btn-sm">{{ $text['edit'] ?? 'Edit' }}</a>
+                    <form action="{{ route('inventory.detail.destroy', $inventoryDetail->id) }}" method="POST" class="d-inline" onsubmit="return confirm('{{ $text['confirm_delete'] ?? 'Are you sure?' }}');">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        <button type="submit" class="btn btn-danger btn-sm">{{ $text['delete'] ?? 'Delete' }}</button>
                     </form>
                 </td>
             </tr>
